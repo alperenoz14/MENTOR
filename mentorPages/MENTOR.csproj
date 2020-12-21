@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\starter\beauty.html" />
+    <None Include="wwwroot\starter\contact.html" />
+    <None Include="wwwroot\starter\css\style-starter.css" />
+    <None Include="wwwroot\starter\fashion.html" />
+    <None Include="wwwroot\starter\fonts\fontawesome-webfont.eot" />
+    <None Include="wwwroot\starter\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\starter\fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\starter\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\starter\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\starter\fonts\FontAwesome.otf" />
+    <None Include="wwwroot\starter\images\pic1.jpg" />
+    <None Include="wwwroot\starter\images\pic2.jpg" />
+    <None Include="wwwroot\starter\images\pic3.jpg" />
+    <None Include="wwwroot\starter\index.html" />
+    <None Include="wwwroot\starter\js\bootstrap.min.js" />
+    <None Include="wwwroot\starter\js\jquery-3.3.1.min.js" />
+    <None Include="wwwroot\starter\js\owl.carousel.js" />
+    <None Include="wwwroot\starter\js\theme-change.js" />
+    <None Include="wwwroot\starter\starter-license-W3Layouts.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+  </ItemGroup>
+
+</Project>
