@@ -73,10 +73,10 @@
                                             <input asp-for="mentor.LastName" type="text" name="lastname" placeholder="Soyisim" required="">
                                         </div>
                                         <div class="form-left-w3l">
-                                            <input asp-for="mentor.Email" type="email" name="email" placeholder="Email" required="">
+                                            <input asp-for="mentor.email" type="email" name="email" placeholder="Email" required="">
                                         </div>
                                         <div class="form-control" style="margin-bottom: 15px">
-                                            <select class="mul-select" multiple="multiple">
+                                            <select asp-for="mentor.branchIds" name="branchIds" class="mul-select" multiple="multiple">
                                                 <option>Web Programlama</option>
                                                 <option>Mobil Programlama</option>
                                                 <option>Veri Bilimi</option>
@@ -88,7 +88,7 @@
                                             <textarea asp-for="mentor.Description" rows="4" cols="50" type="description" name="description" placeholder="Kısaca Hakkında" required=""></textarea>
                                         </div>
                                         <div class="form-right-w3ls ">
-                                            <input asp-for="mentor.Password" type="password" name="password" placeholder="Şifre" required="">
+                                            <input asp-for="mentor.password" type="password" name="password" placeholder="Şifre" required="">
                                         </div>
                                         <div class="form-right-w3ls ">
                                             <input type="password" name="password" placeholder="Şifre Tekrar" required="">
@@ -120,20 +120,20 @@
                                             <input asp-for="student.LastName" type="text" name="lastName" placeholder="Soyisim" required="">
                                         </div>
                                         <div class="form-left-w3l">
-                                            <input asp-for="student.Email" type="email" name="email" placeholder="Email" required="">
+                                            <input asp-for="student.email" type="email" name="email" placeholder="Email" required="">
                                         </div>
                                         <div class="form-left-w3l">
-                                            <select class="form-control" id="alan">
+                                            <select asp-for="student.branch" name="branch" class="form-control" id="alan">
                                                 <option disabled selected title="Alanınızı seçiniz">Alanınızı seçiniz</option>
                                                 <option>Web Programlama</option>
                                                 <option>Mobil Programlama</option>
-                                                <option>Veri Bilimi </option>
-                                                <option>Yapay Zeka/Makine Öğrenmesi </option>
-                                                <option>Genel Tavsiye </option>
+                                                <option>Veri Bilimi</option>
+                                                <option>Yapay Zeka/Makine Öğrenmesi</option>
+                                                <option>Genel Tavsiye</option>
                                             </select>
                                         </div>
                                         <div class="form-right-w3ls ">
-                                            <input asp-for="student.Password" type="password" name="password" placeholder="Şifre" required="">
+                                            <input asp-for="student.password" type="password" name="password" placeholder="Şifre" required="">
                                         </div>
                                         <div class="form-right-w3ls ">
                                             <input type="password" name="password" placeholder="Şifre Tekrar" required="">

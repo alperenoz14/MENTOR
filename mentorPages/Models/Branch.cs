@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace MENTOR.Models
 {
-    public class Student: User
+    public class Branch
     {
-        public string branch { get; set; }
         public int branchId { get; set; }
     }
 }

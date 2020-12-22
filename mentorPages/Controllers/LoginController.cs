@@ -27,8 +27,8 @@ namespace MENTOR.Controllers
             using (var client = new HttpClient())
             {
                 IList<KeyValuePair<string, string>> userCollection = new List<KeyValuePair<string, string>> {
-    { new KeyValuePair<string, string>("email",user.Email) },
-    { new KeyValuePair<string, string>("password", user.Password) }
+    { new KeyValuePair<string, string>("email",user.email) },
+    { new KeyValuePair<string, string>("password", user.password) }
                 };
                 var result = await client.PostAsync("http://localhost:3000/mentor/login", new FormUrlEncodedContent(userCollection));
                 string resultContent = await result.Content.ReadAsStringAsync();
