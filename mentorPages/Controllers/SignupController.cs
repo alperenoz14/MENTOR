@@ -30,7 +30,7 @@ namespace MENTOR.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Signup(Mentor mentor)
-        {   //mentorbranchId'lerinin çekimi...
+        {   //mentorbranchId'lerinin çekimi ve list olarak gönderiliyor ID'ler...
             using (var client = new HttpClient())
             {
                 /*client.BaseAddress = new Uri("http://localhost:63744/api/MyApi");
@@ -47,16 +47,19 @@ namespace MENTOR.Controllers
                 {
                     return StatusCode(404, result);
                 }*/
-                
-                IList<KeyValuePair<string, string>> mentorCollection = new List<KeyValuePair<string, string>> {
+
+                /*IList<KeyValuePair<string, string>> mentorCollection = new List<KeyValuePair<string, string>> {
     { new KeyValuePair<string, string>("ad",mentor.Name) },
     { new KeyValuePair<string, string>("soyad",mentor.LastName) },
     { new KeyValuePair<string, string>("description",mentor.Description) },
     { new KeyValuePair<string, string>("password", mentor.password) },
     { new KeyValuePair<string, string>("email", mentor.email) },
-                };
+                };*/
                 //client.BaseAddress = new Uri("http://localhost:3000/mentor/register");
-                var result = await client.PostAsync("http://localhost:3000/mentor/register", new FormUrlEncodedContent(mentorCollection));
+                var content = JsonConvert.SerializeObject(mentor);
+                HttpContent formContent = new StringContent(content,
+                    System.Text.Encoding.UTF8, "application/json");
+                var result = await client.PostAsync("http://localhost:3000/mentor/register",formContent);
                 string resultContent = await result.Content.ReadAsStringAsync();
                 if (result.StatusCode == System.Net.HttpStatusCode.OK)
                 {
@@ -88,7 +91,7 @@ namespace MENTOR.Controllers
     { new KeyValuePair<string, object>("password", student.Password) },
     { new KeyValuePair<string, object>("email", student.Email) },
     { new KeyValuePair<string, object>("branchId",student.branchId ) },
-
+                    
                 };*/
                 var content = JsonConvert.SerializeObject(student);
                 HttpContent formContent = new StringContent(content,

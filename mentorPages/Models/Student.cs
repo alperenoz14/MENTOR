@@ -9,5 +9,6 @@ namespace MENTOR.Models
     {
         public string branch { get; set; }
         public int branchId { get; set; }
+        public int studentId { get; set; }
     }
 }
