@@ -15,7 +15,7 @@ namespace MENTOR.Controllers
 
         public IActionResult Homepage()
         {
-            return View();
+             return View();
         }
 
         [HttpGet]

@@ -30,7 +30,7 @@ namespace MENTOR.Controllers
     { new KeyValuePair<string, string>("email",user.email) },
     { new KeyValuePair<string, string>("password", user.password) }
                 };
-                                                                        //ayrım yapılıp studente atılacak...          
+                                                                 //ayrım yapılıp studente atılacak...          
                 var result = await client.PostAsync("http://localhost:3000/mentor/login", new FormUrlEncodedContent(userCollection));
                 string resultContent = await result.Content.ReadAsStringAsync();
                 var response = JsonConvert.DeserializeObject<Mentor>(resultContent);
@@ -40,7 +40,7 @@ namespace MENTOR.Controllers
                 //roller :(...
                 if (result.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    return StatusCode(200, response.mentorId);
+                    return RedirectToAction("Profile", "Mentor");
                 }
                 else if (result.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {

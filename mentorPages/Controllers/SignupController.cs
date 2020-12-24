@@ -106,7 +106,6 @@ namespace MENTOR.Controllers
                     {
                         return StatusCode(404, resultContent);
                     }
-
                 }
             return StatusCode(404);
         }

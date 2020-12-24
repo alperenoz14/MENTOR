@@ -31,11 +31,11 @@ namespace MENTOR.Controllers
                 result.mentorId = Convert.ToInt32(id);
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    return View(response);
+                    return View(result);
                 }
                 else
                 {
-                    return StatusCode(404, result.mentorId);
+                    return StatusCode(404);
                 }
             }
         }
