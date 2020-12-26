@@ -9,6 +9,6 @@ namespace MENTOR.Models
     {
         public string Description { get; set; }
         public int mentorId { get; set; }
-        public List<int> branchIds { get; set; }
+        public int branchId { get; set; }
     }
 }
