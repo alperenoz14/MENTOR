@@ -75,15 +75,14 @@
                                         <div class="form-left-w3l">
                                             <input asp-for="mentor.email" type="email" name="email" placeholder="Email" required="">
                                         </div>
-                                        <div class="form-control" style="margin-bottom: 15px">
-                                            <select asp-for="mentor.branchId" name="branchId">
+                                        <select asp-for="mentor.branchId" name="branchId" class="form-control" style="margin-bottom: 15px">
+                                                <option disabled selected title="Alanınızı seçiniz">Alanınızı seçiniz</option>  
                                                 <option value="1">Web Programlama</option>
                                                 <option value="2">Mobil Programlama</option>
                                                 <option value="3">Veri Bilimi</option>
                                                 <option value="4">Yapay Zeka/Makine Öğrenmesi</option>
                                                 <option value="5">Genel Tavsiye</option>
-                                            </select>
-                                        </div>
+                                        </select>
                                         <div class="form-left-w3l">
                                             <textarea asp-for="mentor.Description" rows="4" cols="50" type="description" name="description" placeholder="Kısaca Hakkında" required=""></textarea>
                                         </div>

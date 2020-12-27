@@ -12,14 +12,6 @@ namespace MENTOR.Controllers
 {
     public class SignupController : Controller
     {
-        enum branches
-        {
-            WebProgramlama = 1,
-            MobilProgramlama = 2,
-            VeriBilimi = 3,
-            MakineÖğrenmesi = 4,
-            GenelTavsiye = 5
-        }
         [HttpGet]
         public async Task<IActionResult> Signup()
         {
@@ -85,14 +77,7 @@ namespace MENTOR.Controllers
             else if (branch == "Genel Tavsiye") student.branchId = 5;
             using (var client = new HttpClient())
                 {
-                    /*IList<KeyValuePair<string, object>> studentCollection = new List<KeyValuePair<string, object>> {
-    { new KeyValuePair<string, object>("ad",student.Name) },
-    { new KeyValuePair<string, object>("soyad",student.LastName) },
-    { new KeyValuePair<string, object>("password", student.Password) },
-    { new KeyValuePair<string, object>("email", student.Email) },
-    { new KeyValuePair<string, object>("branchId",student.branchId ) },
                     
-                };*/
                 var content = JsonConvert.SerializeObject(student);
                 HttpContent formContent = new StringContent(content,
                 System.Text.Encoding.UTF8, "application/json");
