@@ -30,21 +30,28 @@ namespace MENTOR.Controllers
     { new KeyValuePair<string, string>("email",user.email) },
     { new KeyValuePair<string, string>("password", user.password) }
                 };
-                                                                 //ayrım yapılıp studente atılacak...          
-                var result = await client.PostAsync("http://localhost:3000/mentor/login", new FormUrlEncodedContent(userCollection));
+                                                                 //loginde ayrım yapılıp studente atılacak...          
+                var result = await client.PostAsync("http://localhost:3000/login", new FormUrlEncodedContent(userCollection));
                 string resultContent = await result.Content.ReadAsStringAsync();
-                var response = JsonConvert.DeserializeObject<Mentor>(resultContent);
-                HttpContext.Session.SetInt32("mentorId", response.mentorId);
-                //student id de sessionda tutulacak ve diger servis requestlerine parametre olarak geçecek...
-                //student/mentor login işlemleri halledilecek...
-                //roller
                 if (result.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    return RedirectToAction("Profile", "Mentor");
+                    dynamic json = JsonConvert.DeserializeObject(resultContent);
+                    if (json.role == "mentor")
+                    {
+                        int mentorId = Convert.ToInt32(json.mentorId);
+                        HttpContext.Session.SetInt32("mentorId", mentorId);
+                        return RedirectToAction("Profile", "Mentor");
+                    }
+                    else if (json.role == "student")
+                    {
+                        int studentId = Convert.ToInt32(json.studentId);
+                        HttpContext.Session.SetInt32("studentId", studentId);
+                        return RedirectToAction("Profile", "Student");
+                    }
                 }
                 else if (result.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    return StatusCode(404, response.mentorId);
+                    return StatusCode(404,0);
                 }
             }
             return StatusCode(404);

@@ -1,4 +1,5 @@
-﻿@model MENTOR.Models.Mentor
+﻿
+@model MENTOR.Models.Mentor
 @{
     ViewData["Title"] = "Test";
     Layout = "~/Views/Shared/_mentorLayout.cshtml";
@@ -30,13 +31,13 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Ad</label>
                         <div class="col-sm-10">
-                            <input asp-for="Name" type="text" class="form-control" placeholder="@Model.Name">
+                            <input asp-for="name" type="text" class="form-control" placeholder="@Model.name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="surname" class="col-sm-2 col-form-label">Soyad</label>
                         <div class="col-sm-10">
-                            <input asp-for="LastName" type="text" class="form-control" placeholder="@Model.LastName">
+                            <input asp-for="lastName" type="text" class="form-control" placeholder="@Model.lastName">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -56,13 +57,12 @@
                         <label for="branch" class="col-sm-2 col-form-label">Alan</label>
                         <div class="col-sm-10">
                             <div class="form-control">
-                                <select class="mul-select" multiple="multiple" style="width: 100%">
-                                    <option>Web Programlama</option>
-                                    <option>Mobil Programlama</option>
-                                    <option>Veri Bilimi</option>
-                                    <option>Yapay Zeka/Makine Öğrenmesi</option>
-                                    <option>Genel Tavsiye</option>
-                                </select>
+                                @*<select class="mul-select" style="width: 100%">
+            @foreach (var branch in Model.allBranchs)
+            {
+                <option value="@branch.branchId">@branch.branchName</option>
+            }
+        </select>*@
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                     <div class="form-group row">
                         <label for="about" class="col-sm-2 col-form-label">Hakkında</label>
                         <div class="col-sm-10">
-                            <textarea asp-for="Description" class="col-sm-12" style="height: 100px"></textarea>
+                            <textarea asp-for="description" class="col-sm-12" style="height: 100px">@Model.description</textarea>
                         </div>
                     </div>
 

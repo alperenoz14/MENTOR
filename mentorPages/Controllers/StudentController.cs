@@ -24,14 +24,15 @@ namespace MENTOR.Controllers
             using (var client = new HttpClient())
             {
                 //test edilecek...
-                // loginden studentId session cekilecek..
-                var response = await client.GetAsync("http://localhost:3000/student/getProfileInfo/" /*studentId*/);
+                var id = HttpContext.Session.GetInt32("studentId");
+                var response = await client.GetAsync("http://localhost:3000/student/getProfileInfo/" + id);
                 string responseContent = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<Student>(responseContent);
                 // result.studentId = sessiondan gelen Id...
                 if (response.StatusCode == System.Net.HttpStatusCode.OK && response != null)
                 {
                     return View(result);
+                    //branches db'den çekilecek...
                 }
                 else
                 {

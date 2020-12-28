@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http;
 using MENTOR.Models;
+using MENTOR.ApiModel;
 
 namespace MENTOR.Controllers
 {
@@ -25,13 +26,19 @@ namespace MENTOR.Controllers
             {
                 //branches bastırılacak...
                 var id = HttpContext.Session.GetInt32("mentorId");
-                var response = await client.GetAsync("http://localhost:3000/mentor/getProfileInfo/" + id);
-                string responseContent = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<Mentor>(responseContent);
-                result.mentorId = Convert.ToInt32(id);
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                var responseMentor = await client.GetAsync("http://localhost:3000/mentor/getProfileInfo/" + id);
+                var responseBranchs = await client.GetAsync("http://localhost:3000/getAllBranchs");
+                
+                //result.mentorId = Convert.ToInt32(id);
+                if (responseMentor.StatusCode == System.Net.HttpStatusCode.OK &&
+                    responseBranchs.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    return View(result);
+                    string responseMentorContent = await responseMentor.Content.ReadAsStringAsync();
+                    var resultMentor = JsonConvert.DeserializeObject<Mentor>(responseMentorContent);
+
+                    string responseBranchContent = await responseBranchs.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<List<Branch>>(responseBranchContent);
+                    return View(resultMentor);
                 }
                 else
                 {

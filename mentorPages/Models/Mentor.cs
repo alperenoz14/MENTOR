@@ -7,8 +7,9 @@ namespace MENTOR.Models
 {
     public class Mentor: User
     {
-        public string Description { get; set; }
+        public string description { get; set; }
         public int mentorId { get; set; }
         public int branchId { get; set; }
+        public List<Branch> allBranchs { get; set; }
     }
 }
