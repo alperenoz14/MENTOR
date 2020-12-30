@@ -40,13 +40,7 @@ namespace MENTOR.Controllers
                     return StatusCode(404, result);
                 }*/
 
-                /*IList<KeyValuePair<string, string>> mentorCollection = new List<KeyValuePair<string, string>> {
-    { new KeyValuePair<string, string>("ad",mentor.Name) },
-    { new KeyValuePair<string, string>("soyad",mentor.LastName) },
-    { new KeyValuePair<string, string>("description",mentor.Description) },
-    { new KeyValuePair<string, string>("password", mentor.password) },
-    { new KeyValuePair<string, string>("email", mentor.email) },
-                };*/
+                
                 //client.BaseAddress = new Uri("http://localhost:3000/mentor/register");
                 var content = JsonConvert.SerializeObject(mentor);
                 HttpContent formContent = new StringContent(content,
