@@ -60,12 +60,16 @@ namespace MENTOR.Controllers
             var mentorid = HttpContext.Session.GetInt32("mentorId"); 
             using (var client = new HttpClient())
             {
+                mentor.mentorId = Convert.ToInt32(mentorid);
+                mentor.branchId = Convert.ToInt32(mentor.branch);
+
                 var content = JsonConvert.SerializeObject(mentor);
                 HttpContent formContent = new StringContent(content,
                     System.Text.Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("http://localhost:3000/mentor/updateProfile" + 
                                                         mentorid, formContent);
                 string responseContent = await response.Content.ReadAsStringAsync();
+                //error here...
                 var result = JsonConvert.DeserializeObject<Mentor>(responseContent);
                 if (response.StatusCode == System.Net.HttpStatusCode.OK && result != null)
                 {
