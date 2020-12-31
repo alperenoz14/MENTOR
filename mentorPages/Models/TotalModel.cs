@@ -10,6 +10,6 @@ namespace MENTOR.Models
         public User user { get; set; }
         public Mentor mentor { get; set; }
         public Student student { get; set; }
-        public Branch branch { get; set; }
+        public List<Branch> branch { get; set; }
     }
 }

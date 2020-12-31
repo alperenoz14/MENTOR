@@ -22,22 +22,29 @@ namespace MENTOR.Controllers
         [HttpGet]
         public async Task<IActionResult> Profile()
         {
+            
             using (var client = new HttpClient())
             {
                 //branches bastırılacak...
                 var id = HttpContext.Session.GetInt32("mentorId");
                 var responseMentor = await client.GetAsync("http://localhost:3000/mentor/getProfileInfo/" + id);
                 var responseBranchs = await client.GetAsync("http://localhost:3000/getAllBranchs");
-                
-                //result.mentorId = Convert.ToInt32(id);
+
                 if (responseMentor.StatusCode == System.Net.HttpStatusCode.OK &&
-                    responseBranchs.StatusCode == System.Net.HttpStatusCode.OK)
+                    responseBranchs.StatusCode == System.Net.HttpStatusCode.OK && responseMentor != null)
                 {
                     string responseMentorContent = await responseMentor.Content.ReadAsStringAsync();
                     var resultMentor = JsonConvert.DeserializeObject<Mentor>(responseMentorContent);
+                    resultMentor.mentorId = Convert.ToInt32(id);
+                    if (resultMentor.branchId == 1) resultMentor.branch = "Web Programlama";
+                    else if (resultMentor.branchId == 2) resultMentor.branch = "Mobil Programlama";
+                    else if (resultMentor.branchId == 3) resultMentor.branch = "Veri Bilimi";
+                    else if (resultMentor.branchId == 4) resultMentor.branch = "Yapay Zeka/Makine Öğrenmesi";
+                    else if (resultMentor.branchId == 5) resultMentor.branch = "Genel Tavsiye";
 
                     string responseBranchContent = await responseBranchs.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<List<Branch>>(responseBranchContent);
+                    var resultBranches = JsonConvert.DeserializeObject<List<Branch>>(responseBranchContent);
+                    resultMentor.AllBranches = resultBranches;
                     return View(resultMentor);
                 }
                 else

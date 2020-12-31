@@ -35,19 +35,19 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Soyad</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="@Model.lastName">
+                            <input asp-for="lastName" class="form-control" placeholder="@Model.lastName">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">E Posta</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" placeholder="@Model.email">
+                            <input asp-for="email" class="form-control" placeholder="@Model.email">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" placeholder="@Model.password">
+                            <input asp-for="password" class="form-control" placeholder="@Model.password">
                         </div>
                     </div>
 
@@ -55,15 +55,13 @@
                         <label for="inputPassword3" class="col-sm-2 col-form-label">Alan</label>
                         <div class="col-sm-10">
                             <select class="form-control" placeholder="@Model.branch">
-                                <option>Web Programlama</option>
-                                <option>Mobil Programlama</option>
-                                <option>Veri Bilimi</option>
-                                <option>Yapay Zeka/Makine Öğrenmesi</option>
-                                <option>Genel Tavsiye</option>
+                                @foreach (var item in Model.AllBranches)
+                                {
+                                    <option value="@item.branchId">@item.branchName</option>
+                                }
                             </select>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

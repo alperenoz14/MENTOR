@@ -26,13 +26,24 @@ namespace MENTOR.Controllers
                 //test edilecek...
                 var id = HttpContext.Session.GetInt32("studentId");
                 var response = await client.GetAsync("http://localhost:3000/student/getProfileInfo/" + id);
-                string responseContent = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<Student>(responseContent);
-                // result.studentId = sessiondan gelen Id...
-                if (response.StatusCode == System.Net.HttpStatusCode.OK && response != null)
+                var responseBranches = await client.GetAsync("http://localhost:3000/getAllBranchs");
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK && 
+                    responseBranches.StatusCode == System.Net.HttpStatusCode.OK && response != null)
                 {
-                    return View(result);
-                    //branches db'den çekilecek...
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    var resultStudent = JsonConvert.DeserializeObject<Student>(responseContent);
+                    if (resultStudent.branchId == 1) resultStudent.branch = "Web Programlama";
+                    else if (resultStudent.branchId == 2) resultStudent.branch = "Mobil Programlama";
+                    else if (resultStudent.branchId == 3) resultStudent.branch = "Veri Bilimi";
+                    else if (resultStudent.branchId == 4) resultStudent.branch = "Yapay Zeka/Makine Öğrenmesi";
+                    else if (resultStudent.branchId == 5) resultStudent.branch = "Genel Tavsiye";
+                    resultStudent.studentId = Convert.ToInt32(id);
+
+                    string responseBranchContent = await responseBranches.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<List<Branch>>(responseBranchContent);
+                    resultStudent.AllBranches = result;
+                    return View(resultStudent);
                 }
                 else
                 {

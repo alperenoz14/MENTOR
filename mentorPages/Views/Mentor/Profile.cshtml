@@ -1,5 +1,6 @@
 ﻿
 @model MENTOR.Models.Mentor
+
 @{
     ViewData["Title"] = "Test";
     Layout = "~/Views/Shared/_mentorLayout.cshtml";
@@ -56,14 +57,12 @@
                     <div class="form-group row">
                         <label for="branch" class="col-sm-2 col-form-label">Alan</label>
                         <div class="col-sm-10">
-                            <div class="form-control">
-                                @*<select class="mul-select" style="width: 100%">
-            @foreach (var branch in Model.allBranchs)
-            {
-                <option value="@branch.branchId">@branch.branchName</option>
-            }
-        </select>*@
-                            </div>
+                            <select class="form-control" style="width: 100%" placeholder="@Model.branch">
+                                @foreach (var item in Model.AllBranches)
+                                {
+                                    <option value="@item.branchId">@item.branchName</option>
+                                }
+                            </select>
                         </div>
                     </div>
 
