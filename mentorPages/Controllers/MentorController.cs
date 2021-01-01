@@ -22,7 +22,7 @@ namespace MENTOR.Controllers
         [HttpGet]
         public async Task<IActionResult> Profile()
         {
-            
+
             using (var client = new HttpClient())
             {
                 //branches bastırılacak...
@@ -57,27 +57,24 @@ namespace MENTOR.Controllers
         [HttpPost]
         public async Task<IActionResult> Profile(Mentor mentor)
         {//yeni datalarla viewin doldurulup doldurulmadıgı test edilecek(updated)...
-            var mentorid = HttpContext.Session.GetInt32("mentorId"); 
             using (var client = new HttpClient())
             {
-                mentor.mentorId = Convert.ToInt32(mentorid);
+                mentor.mentorId = Convert.ToInt32(HttpContext.Session.GetInt32("mentorId"));
                 mentor.branchId = Convert.ToInt32(mentor.branch);
-
+                //password problem...
                 var content = JsonConvert.SerializeObject(mentor);
                 HttpContent formContent = new StringContent(content,
                     System.Text.Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:3000/mentor/updateProfile" + 
-                                                        mentorid, formContent);
+                var response = await client.PostAsync("http://localhost:3000/mentor/updateProfile/" + mentor.mentorId,
+                                                                                                                 formContent);
                 string responseContent = await response.Content.ReadAsStringAsync();
-                //error here...
-                var result = JsonConvert.DeserializeObject<Mentor>(responseContent);
-                if (response.StatusCode == System.Net.HttpStatusCode.OK && result != null)
+                if (response.StatusCode == System.Net.HttpStatusCode.OK && responseContent != null)
                 {
-                    return View(result);
+                    return RedirectToAction("Profile", "Mentor");
                 }
                 else
                 {
-                    return StatusCode(404,result.mentorId);
+                    return StatusCode(Convert.ToInt16(response.StatusCode));
                 }
             }
         }

@@ -57,18 +57,18 @@ namespace MENTOR.Controllers
         {
             using (var client = new HttpClient())
             {
-                //loginden gelen studentId sessionu çekilecek...
+                student.studentId = Convert.ToInt32(HttpContext.Session.GetInt32("studentId"));
+                student.branchId = Convert.ToInt32(student.branch);
                 //test edilecek(updated?)...
                 var content = JsonConvert.SerializeObject(student);
                 HttpContent formContent  = new StringContent(content,
                     System.Text.Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:3000/student/updateProfile",//+ studentId,
-                                                        formContent);
+                var response = await client.PostAsync("http://localhost:3000/student/updateProfile/" + student.studentId,
+                                                                                                                    formContent);
                 string responseContent = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<Student>(responseContent);
-                if (response.StatusCode == System.Net.HttpStatusCode.OK && result != null)
+                if (response.StatusCode == System.Net.HttpStatusCode.OK && responseContent != null)
                 {
-                    return View(result);
+                    return RedirectToAction("Profile","Student");
                 }
                 else
                 {

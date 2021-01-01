@@ -20,7 +20,7 @@ namespace MENTOR.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Login(User user)
         {
@@ -30,7 +30,7 @@ namespace MENTOR.Controllers
     { new KeyValuePair<string, string>("email",user.email) },
     { new KeyValuePair<string, string>("password", user.password) }
                 };
-                                                                 //loginde ayrım yapılıp studente atılacak...          
+
                 var result = await client.PostAsync("http://localhost:3000/login", new FormUrlEncodedContent(userCollection));
                 string resultContent = await result.Content.ReadAsStringAsync();
                 if (result.StatusCode == System.Net.HttpStatusCode.OK)
@@ -51,11 +51,11 @@ namespace MENTOR.Controllers
                 }
                 else if (result.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    return StatusCode(404,0);
+                    return StatusCode(404, 0);
                 }
             }
             return StatusCode(404);
         }
-        
+
     }
 }
