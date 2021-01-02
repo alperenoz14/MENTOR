@@ -57,7 +57,7 @@
                     <div class="form-group row">
                         <label for="password" class="col-sm-2 col-form-label">Şu anki Alan</label>
                         <div class="col-sm-10">
-                            <input disabled class="form-control" placeholder="@Model.branch">
+                            <input asp-for="branch" disabled class="form-control" placeholder="@Model.branch">
                         </div>
                     </div>
 
@@ -65,7 +65,7 @@
                         <label for="branch" class="col-sm-2 col-form-label">Alanını Değiştir</label>
                         <div class="col-sm-10">
                             <select asp-for="branch" class="form-control" style="width: 100%" placeholder="@Model.branch">
-                                @*<option value="0" disabled>@Model.branch</option>*@
+                                <option value="@Model.branchId">@Model.branch</option>
                                 @foreach (var item in Model.AllBranches)
                                 {
                                     <option value="@item.branchId">@item.branchName</option>
