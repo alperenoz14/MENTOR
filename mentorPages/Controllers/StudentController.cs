@@ -21,7 +21,7 @@ namespace MENTOR.Controllers
             //{
             //    var id = HttpContext.Session.GetInt32("studentId");
             //    var responseQlist = await client.GetAsync("http://localhost:3000/student/getQuestionList/" + id);
-            //    var responseMentorInfo = await client.GetAsync("http://localhost:3000/student/getQuestionList/" + id);
+            //    var responseMentorInfo = await client.GetAsync("http://localhost:3000/student/getMentorInfo/" + id);
 
             //    if (responseQlist.StatusCode == System.Net.HttpStatusCode.OK && 
             //            responseMentorInfo.StatusCode == System.Net.HttpStatusCode.OK)
@@ -48,11 +48,18 @@ namespace MENTOR.Controllers
         {
             using (var client = new HttpClient())
             {
+                var id = HttpContext.Session.GetInt32("studentId");
                 //student ıd'sini sessiondan al sonra studentInfosuna get istek at gelen ıd değerleri ile questionu doldur,yolla...
                 //id işlemleri ve post işleminden gelen data kontrol edilecek...
                 //hangi soruya cevap verdiğini nasıl anlayacak?...
                 //question post olduğunda question id versin bana aynı logindeki gibi...
+                //question id belirsizlik...
+                var info = await client.GetAsync("http://localhost:3000/student/getProfileInfo/" + id);
+                string res = await info.Content.ReadAsStringAsync();
+                var student = JsonConvert.DeserializeObject<Student>(res);
+                question.studentId = Convert.ToInt32(id);
                 question.date = DateTime.Now;
+                question.branchId = student.branchId;
                 var content = JsonConvert.SerializeObject(question);
                 HttpContent dataContent = new StringContent(content, 
                           System.Text.Encoding.UTF8, "application/json");
@@ -68,7 +75,6 @@ namespace MENTOR.Controllers
                     return StatusCode(404);
                 }
             }
-            return View();
         }
 
         [HttpGet]

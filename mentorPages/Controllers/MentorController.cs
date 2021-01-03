@@ -31,7 +31,7 @@ namespace MENTOR.Controllers
                     string responseContent = await responseQlist.Content.ReadAsStringAsync();
                     var resultQuestions = JsonConvert.DeserializeObject<IEnumerable<Question>>(responseContent);
                     homepageDatas.Questions = resultQuestions;
-                    //student liste olarak mı gelecek yoksa 1-1 eşleşme mi olacak ?? ben şu an birebir gibi yapıyorum
+                    //student liste olarak mı gelecek yoksa 1-1 eşleşme mi olacak ?? ben şu an birebir gibi yapıyorum...
                     //eğer bire çok derlerse homepage data classına student Ienumerable olarak eklenecek...
                     string responseStudents = await responseStudent.Content.ReadAsStringAsync();
                     var resultStudent = JsonConvert.DeserializeObject<Student>(responseStudents);
@@ -54,7 +54,7 @@ namespace MENTOR.Controllers
                 HttpContent dataContent = new StringContent(content, 
                     System.Text.Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("http://localhost:3000/mentor/answerQuestion/" /* + questionId*/,dataContent);
-
+                //hangi soruya cevap verdiğini anlaması için questionid göndermesi gerekmezmi?...
                 string responseContent = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode == System.Net.HttpStatusCode.OK && responseContent != null)
                 {
