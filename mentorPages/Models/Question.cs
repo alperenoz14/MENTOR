@@ -7,6 +7,7 @@ namespace MENTOR.Models
 {
     public class Question
     {
+        public int questionId { get; set; }
         public string question { get; set; }
         public string answer { get; set; }
         public int branchId { get; set; }

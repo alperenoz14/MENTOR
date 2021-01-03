@@ -12,10 +12,63 @@ namespace MENTOR.Controllers
 {
     public class StudentController : Controller
     {
-
-        public IActionResult Homepage()
+        Homepage homepageDatas = new Homepage();
+        [HttpGet]
+        public async Task<IActionResult> Homepage()
         {
-             return View();
+
+            //using (var client = new HttpClient())
+            //{
+            //    var id = HttpContext.Session.GetInt32("studentId");
+            //    var responseQlist = await client.GetAsync("http://localhost:3000/student/getQuestionList/" + id);
+            //    var responseMentorInfo = await client.GetAsync("http://localhost:3000/student/getQuestionList/" + id);
+
+            //    if (responseQlist.StatusCode == System.Net.HttpStatusCode.OK && 
+            //            responseMentorInfo.StatusCode == System.Net.HttpStatusCode.OK)
+            //    {
+            //        string responseContent = await responseQlist.Content.ReadAsStringAsync();
+            //        var resultQuestions = JsonConvert.DeserializeObject<IEnumerable<Question>>(responseContent);
+            //        homepageDatas.Questions = resultQuestions;
+
+            //        string responseContentMentor = await responseMentorInfo.Content.ReadAsStringAsync();
+            //        var resultMentorInfo = JsonConvert.DeserializeObject<Mentor>(responseContentMentor);
+            //        homepageDatas.MentorInfo = resultMentorInfo;
+            //        return View(homepageDatas);
+            //    }
+            //    else
+            //    {
+            //        return StatusCode(404);
+            //    }
+            //}
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Homepage(Question question)
+        {
+            using (var client = new HttpClient())
+            {
+                //student ıd'sini sessiondan al sonra studentInfosuna get istek at gelen ıd değerleri ile questionu doldur,yolla...
+                //id işlemleri ve post işleminden gelen data kontrol edilecek...
+                //hangi soruya cevap verdiğini nasıl anlayacak?...
+                //question post olduğunda question id versin bana aynı logindeki gibi...
+                question.date = DateTime.Now;
+                var content = JsonConvert.SerializeObject(question);
+                HttpContent dataContent = new StringContent(content, 
+                          System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:3000/student/addQuestion/" + question.studentId,
+                                                                                                                   dataContent);
+                string responseContent = await response.Content.ReadAsStringAsync();
+                if (response.StatusCode == System.Net.HttpStatusCode.OK && responseContent != null)
+                {
+                    return RedirectToAction("Homepage", "Student");
+                }
+                else
+                {
+                    return StatusCode(404);
+                }
+            }
+            return View();
         }
 
         [HttpGet]
@@ -23,7 +76,6 @@ namespace MENTOR.Controllers
         {
             using (var client = new HttpClient())
             {
-                //test edilecek...
                 var id = HttpContext.Session.GetInt32("studentId");
                 var response = await client.GetAsync("http://localhost:3000/student/getProfileInfo/" + id);
                 var responseBranches = await client.GetAsync("http://localhost:3000/getAllBranchs");
@@ -59,7 +111,6 @@ namespace MENTOR.Controllers
             {
                 student.studentId = Convert.ToInt32(HttpContext.Session.GetInt32("studentId"));
                 student.branchId = Convert.ToInt32(student.branch);
-                //test edilecek(updated?)...
                 var content = JsonConvert.SerializeObject(student);
                 HttpContent formContent  = new StringContent(content,
                     System.Text.Encoding.UTF8, "application/json");
@@ -75,10 +126,6 @@ namespace MENTOR.Controllers
                     return StatusCode(404);
                 }
             }
-        } 
-        public IActionResult Mentors()
-        {
-            return View();
         }
     }
 }

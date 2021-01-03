@@ -14,9 +14,57 @@ namespace MENTOR.Controllers
 {
     public class MentorController : Controller
     {
-        public IActionResult Homepage()
+        Homepage homepageDatas = new Homepage();
+        [HttpGet]
+        public async Task<IActionResult> Homepage()
         {
-            return View();
+            using (var client = new HttpClient())
+            {
+                var id = HttpContext.Session.GetInt32("mentorId");
+
+                var responseQlist = await client.GetAsync("http://localhost:3000/mentor/getQuestions/" + id);
+                var responseStudent = await client.GetAsync("http://localhost:3000/mentor/getStudents/" + id);
+
+                if (responseQlist.StatusCode == System.Net.HttpStatusCode.OK && 
+                        responseStudent.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    string responseContent = await responseQlist.Content.ReadAsStringAsync();
+                    var resultQuestions = JsonConvert.DeserializeObject<IEnumerable<Question>>(responseContent);
+                    homepageDatas.Questions = resultQuestions;
+                    //student liste olarak mı gelecek yoksa 1-1 eşleşme mi olacak ?? ben şu an birebir gibi yapıyorum
+                    //eğer bire çok derlerse homepage data classına student Ienumerable olarak eklenecek...
+                    string responseStudents = await responseStudent.Content.ReadAsStringAsync();
+                    var resultStudent = JsonConvert.DeserializeObject<Student>(responseStudents);
+                    homepageDatas.Students = resultStudent;
+                    return View(homepageDatas);
+                }
+                else
+                {
+                    return StatusCode(404);
+                }
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Homepage(Answer answer)
+        {
+            using (var client = new HttpClient())
+            {
+                var content = JsonConvert.SerializeObject(answer);
+                HttpContent dataContent = new StringContent(content, 
+                    System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:3000/mentor/answerQuestion/" /* + questionId*/,dataContent);
+
+                string responseContent = await response.Content.ReadAsStringAsync();
+                if (response.StatusCode == System.Net.HttpStatusCode.OK && responseContent != null)
+                {
+                    return RedirectToAction("Homepage", "Student");
+                }
+                else
+                {
+                    return StatusCode(404);
+                }
+            }
         }
 
         [HttpGet]

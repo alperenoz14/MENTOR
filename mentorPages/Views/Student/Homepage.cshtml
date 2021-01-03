@@ -1,4 +1,4 @@
-﻿
+﻿@model MENTOR.Models.Homepage
 @{
     ViewData["Title"] = "Test";
     Layout = "~/Views/Shared/_studentLayout.cshtml";
@@ -25,32 +25,35 @@
             <div class="col-lg-8">
 
                 <!-- Default box -->
-                <div class="card card-outline card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Soru Sor</h3>
+                <form asp-controller="Student" asp-action="Homepage">
+                    <div class="card card-outline card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Soru Sor</h3>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <textarea asp-for="Question.question" class="form-control" rows="5"></textarea>
+                            </form>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="form-control btn btn-primary">Sor</button>
+                        </div>
+                        <!-- /.card-footer-->
                     </div>
-                    <div class="card-body">
-                        <form>
-                            <textarea class="form-control" rows="5"></textarea>
-                        </form>
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                        <button type="submit" class="form-control btn btn-primary">Sor</button>
-                    </div>
-                    <!-- /.card-footer-->
-                </div>
+                </form>
                 <!-- /.card -->
 
                 <h3 class="m-4 pt-4 pb-4 text-dark text-center">Sorularım</h3>
-
-
+                @*@foreach (var question in Model.Questions)
+                    {*@
                 <div class="card card-outline card-success p-4">
                     <div class="card-header">
-                        <h3 class="card-title">Cevaplanan sorunun sorusu</h3>
+                        <h3 class="card-title">@*@question.question*@ Cevaplanan sorunun sorusu</h3>
                     </div>
                     <div class="card-body">
                         <p>
+                            @*@question.answer*@
                             cevabı  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -59,14 +62,13 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <span>Soru tarihi:</span> 19.11; 22 Kasım 2020
+                        <span>Soru tarihi:</span>@*@question.date*@ 19.11; 22 Kasım 2020
                     </div>
                     <!-- /.card-footer-->
                 </div>
+                @*}*@
                 <!-- /.card -->
-
-
-                <div class="card card-outline card-warning p-4">
+                <!--<div class="card card-outline card-warning p-4">
                     <div class="card-header">
                         <h3 class="card-title">Cevap bekleyen sorunun sorusu</h3>
                     </div>
@@ -78,10 +80,10 @@
                     <div class="card-footer">
                         <span>Soru tarihi:</span> 19.11; 22 Kasım 2020
                     </div>
-                    <!-- /.card-body -->
+                     /.card-body
                 </div>
                 <!-- /.card -->
-
+                -->
 
 
             </div>
@@ -97,35 +99,24 @@
                                  alt="User profile picture">
                         </div>
 
-                        <h3 class="profile-username text-center">Nina Mcintire</h3>
+                        <h3 class="profile-username text-center">@*@Model.MentorInfo.name*@alperen öz</h3>
 
                         <p class="text-muted text-center">Software Engineer</p>
 
-                        <strong><i class="fas fa-book mr-1"></i> Education</strong>
+
+                        <hr>
+
+                        <strong><i class="fas fa-pencil-alt mr-1"></i>Alanı</strong>
 
                         <p class="text-muted">
-                            B.S. in Computer Science from the University of Tennessee at Knoxville
+                            <span class="tag tag-danger">@*@Model.MentorInfo.branch*@UI Design</span>
                         </p>
 
                         <hr>
 
+                        <strong><i class="far fa-file-alt mr-1"></i>Hakkında</strong>
 
-
-                        <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
-                        <p class="text-muted">
-                            <span class="tag tag-danger">UI Design</span>
-                            <span class="tag tag-success">Coding</span>
-                            <span class="tag tag-info">Javascript</span>
-                            <span class="tag tag-warning">PHP</span>
-                            <span class="tag tag-primary">Node.js</span>
-                        </p>
-
-                        <hr>
-
-                        <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                        <p class="text-muted">@*@Model.MentorInfo.description*@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
 
                     </div>
                     <!-- /.card-body -->
