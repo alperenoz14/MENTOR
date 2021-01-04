@@ -45,15 +45,15 @@
                 <!-- /.card -->
 
                 <h3 class="m-4 pt-4 pb-4 text-dark text-center">Sorularım</h3>
-                @*@foreach (var question in Model.Questions)
-                    {*@
+                @foreach (var question in Model.Questions)
+                    {
                 <div class="card card-outline card-success p-4">
                     <div class="card-header">
-                        <h3 class="card-title">@*@question.question*@ Cevaplanan sorunun sorusu</h3>
+                        <h3 class="card-title">@question.question Cevaplanan sorunun sorusu</h3>
                     </div>
                     <div class="card-body">
                         <p>
-                            @*@question.answer*@
+                            @question.answer
                             cevabı  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -62,11 +62,11 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <span>Soru tarihi:</span>@*@question.date*@ 19.11; 22 Kasım 2020
+                        <span>Soru tarihi:</span>@question.date 19.11; 22 Kasım 2020
                     </div>
                     <!-- /.card-footer-->
                 </div>
-                @*}*@
+                }
                 <!-- /.card -->
                 <!--<div class="card card-outline card-warning p-4">
                     <div class="card-header">
@@ -99,7 +99,7 @@
                                  alt="User profile picture">
                         </div>
 
-                        <h3 class="profile-username text-center">@*@Model.MentorInfo.name*@alperen öz</h3>
+                        <h3 class="profile-username text-center">@Model.MentorInfo.name</h3>
 
                         <p class="text-muted text-center">Software Engineer</p>
 
@@ -109,14 +109,14 @@
                         <strong><i class="fas fa-pencil-alt mr-1"></i>Alanı</strong>
 
                         <p class="text-muted">
-                            <span class="tag tag-danger">@*@Model.MentorInfo.branch*@UI Design</span>
+                            <span class="tag tag-danger">@Model.MentorInfo.branch</span>
                         </p>
 
                         <hr>
 
                         <strong><i class="far fa-file-alt mr-1"></i>Hakkında</strong>
 
-                        <p class="text-muted">@*@Model.MentorInfo.description*@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                        <p class="text-muted">@Model.MentorInfo.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
 
                     </div>
                     <!-- /.card-body -->

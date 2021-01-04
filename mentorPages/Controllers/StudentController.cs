@@ -17,29 +17,30 @@ namespace MENTOR.Controllers
         public async Task<IActionResult> Homepage()
         {
 
-            //using (var client = new HttpClient())
-            //{
-            //    var id = HttpContext.Session.GetInt32("studentId");
-            //    var responseQlist = await client.GetAsync("http://localhost:3000/student/getQuestionList/" + id);
-            //    var responseMentorInfo = await client.GetAsync("http://localhost:3000/student/getMentorInfo/" + id);
+            using (var client = new HttpClient())
+            {
+                var id = HttpContext.Session.GetInt32("studentId");
+                var responseQlist = await client.GetAsync("http://localhost:3000/student/getQuestionList/" + id);
+                var responseMentorInfo = await client.GetAsync("http://localhost:3000/student/getMentorInfo/" + id);
+                //mentor info eksik geliyor...
+                if (responseQlist.StatusCode == System.Net.HttpStatusCode.OK &&
+                        responseMentorInfo.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    string responseContent = await responseQlist.Content.ReadAsStringAsync();
+                    var resultQuestions = JsonConvert.DeserializeObject<List<Question>>(responseContent);
+                    homepageDatas.Questions = resultQuestions;
 
-            //    if (responseQlist.StatusCode == System.Net.HttpStatusCode.OK && 
-            //            responseMentorInfo.StatusCode == System.Net.HttpStatusCode.OK)
-            //    {
-            //        string responseContent = await responseQlist.Content.ReadAsStringAsync();
-            //        var resultQuestions = JsonConvert.DeserializeObject<IEnumerable<Question>>(responseContent);
-            //        homepageDatas.Questions = resultQuestions;
-
-            //        string responseContentMentor = await responseMentorInfo.Content.ReadAsStringAsync();
-            //        var resultMentorInfo = JsonConvert.DeserializeObject<Mentor>(responseContentMentor);
-            //        homepageDatas.MentorInfo = resultMentorInfo;
-            //        return View(homepageDatas);
-            //    }
-            //    else
-            //    {
-            //        return StatusCode(404);
-            //    }
-            //}
+                    string responseContentMentor = await responseMentorInfo.Content.ReadAsStringAsync();
+                    //branch gelme sorunu çözülecek...
+                    var resultMentorInfo = JsonConvert.DeserializeObject<Mentor>(responseContentMentor);
+                    homepageDatas.MentorInfo = resultMentorInfo;
+                    return View(homepageDatas);
+                }
+                else
+                {
+                    return StatusCode(404);
+                }
+            }
             return View();
         }
 
@@ -60,6 +61,8 @@ namespace MENTOR.Controllers
                 question.studentId = Convert.ToInt32(id);
                 question.date = DateTime.Now;
                 question.branchId = student.branchId;
+                question.mentorId = student.mentorId;
+
                 var content = JsonConvert.SerializeObject(question);
                 HttpContent dataContent = new StringContent(content, 
                           System.Text.Encoding.UTF8, "application/json");

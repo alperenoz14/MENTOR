@@ -11,6 +11,7 @@ namespace MENTOR.Models
         public int branchId { get; set; }
         public string branch { get; set; }
         public List<Branch> AllBranches { get; set; }
+        public int mentorId { get; set; }
 
     }
 }

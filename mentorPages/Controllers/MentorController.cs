@@ -29,7 +29,7 @@ namespace MENTOR.Controllers
                         responseStudent.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     string responseContent = await responseQlist.Content.ReadAsStringAsync();
-                    var resultQuestions = JsonConvert.DeserializeObject<IEnumerable<Question>>(responseContent);
+                    var resultQuestions = JsonConvert.DeserializeObject<List<Question>>(responseContent);
                     homepageDatas.Questions = resultQuestions;
                     //student liste olarak mı gelecek yoksa 1-1 eşleşme mi olacak ?? ben şu an birebir gibi yapıyorum...
                     //eğer bire çok derlerse homepage data classına student Ienumerable olarak eklenecek...
