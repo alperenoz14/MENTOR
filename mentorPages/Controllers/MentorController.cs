@@ -33,8 +33,17 @@ namespace MENTOR.Controllers
                     homepageDatas.Questions = resultQuestions;
                     //student liste olarak mı gelecek yoksa 1-1 eşleşme mi olacak ?? ben şu an birebir gibi yapıyorum...
                     //eğer bire çok derlerse homepage data classına student Ienumerable olarak eklenecek...
+
                     string responseStudents = await responseStudent.Content.ReadAsStringAsync();
-                    var resultStudent = JsonConvert.DeserializeObject<Student>(responseStudents);
+                    var resultStudent = JsonConvert.DeserializeObject<List<Student>>(responseStudents);
+                    foreach (var item in resultStudent)
+                    {
+                        if (item.branchId == 1) item.branch = "Web Programlama";
+                        else if (item.branchId == 2) item.branch = "Mobil Programlama";
+                        else if (item.branchId == 3) item.branch = "Veri Bilimi";
+                        else if (item.branchId == 4) item.branch = "Yapay Zeka/Makine Öğrenmesi";
+                        else if (item.branchId == 5) item.branch = "Genel Tavsiye";
+                    }
                     homepageDatas.Students = resultStudent;
                     return View(homepageDatas);
                 }

@@ -33,6 +33,11 @@ namespace MENTOR.Controllers
                     string responseContentMentor = await responseMentorInfo.Content.ReadAsStringAsync();
                     //branch gelme sorunu çözülecek...
                     var resultMentorInfo = JsonConvert.DeserializeObject<Mentor>(responseContentMentor);
+                    if (resultMentorInfo.branchId == 1) resultMentorInfo.branch = "Web Programlama";
+                    else if (resultMentorInfo.branchId == 2) resultMentorInfo.branch = "Mobil Programlama";
+                    else if (resultMentorInfo.branchId == 3) resultMentorInfo.branch = "Veri Bilimi";
+                    else if (resultMentorInfo.branchId == 4) resultMentorInfo.branch = "Yapay Zeka/Makine Öğrenmesi";
+                    else if (resultMentorInfo.branchId == 5) resultMentorInfo.branch = "Genel Tavsiye";
                     homepageDatas.MentorInfo = resultMentorInfo;
                     return View(homepageDatas);
                 }
@@ -41,7 +46,6 @@ namespace MENTOR.Controllers
                     return StatusCode(404);
                 }
             }
-            return View();
         }
 
         [HttpPost]
