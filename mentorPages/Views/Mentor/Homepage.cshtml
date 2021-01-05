@@ -34,25 +34,25 @@
                 {
                     if (item.answer == null)
                     {
+
                         <div class="card card-outline card-warning p-4">
-                            <span><label class="border rounded" style="background-color: mediumpurple">web programlama</label></span>
-                            <h4>SORU:</h4>
-                            <div class="card-header">
-                                <h3 class="card-title">@item.question</h3>
-                            </div>
-                            <div class="card-body">
-                                <h4 style="margin-left: -20px">CEVAP:</h4>
-                                <form>
+                            <form asp-controller="Mentor" asp-action="Homepage">
+                                <span><label class="border rounded" style="background-color: mediumpurple">web programlama</label></span>
+                                <h4>SORU:</h4>
+                                <div class="card-header">
+                                    <h3 class="card-title">@item.question</h3>
+                                </div>
+                                <div class="card-body">
+                                    <h4 style="margin-left: -20px">CEVAP:</h4>
+
                                     <!--asp-for question id ile modele tutup sonra post edilecek...-->
-                                    <input type="hidden" @item.questionId />
-                                    <textarea class="form-control" rows="5"></textarea>
-                                </form>
-                            </div>
-                            <div class="card-footer">
-                                <button type="submit" class="form-control btn btn-primary">Yanıtla</button>
-                                <span>Soran Öğrenci: </span>Test<br />
-                                <span>Soru tarihi:</span> 19.11; 22 Kasım 2020
-                            </div>
+                                    <input asp-for="Answer.questionId" type="hidden" value="@item.questionId" />
+                                    <textarea asp-for="Answer.answer" class="form-control" rows="5"></textarea>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="form-control btn btn-primary">Yanıtla</button>
+                                </div>
+                            </form>
                             <!-- /.card-body -->
                         </div>
                     }
@@ -72,8 +72,8 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <span>Soran Öğrenci: </span>Test<br />
-                                <span>Soru tarihi:</span> 19.11; 22 Kasım 2020
+                                <!--<span>Soran Öğrenci: </span>@item.<br />-->
+                                <span>Soru tarihi:</span>@item.date
                             </div>
                             <!-- /.card-footer-->
                         </div>

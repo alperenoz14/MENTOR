@@ -62,12 +62,11 @@ namespace MENTOR.Controllers
                 var content = JsonConvert.SerializeObject(answer);
                 HttpContent dataContent = new StringContent(content, 
                     System.Text.Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:3000/mentor/answerQuestion/" /* + questionId*/,dataContent);
-                //hangi soruya cevap verdiğini anlaması için questionid göndermesi gerekmezmi?...
+                var response = await client.PostAsync("http://localhost:3000/mentor/answerQuestion" ,dataContent);
                 string responseContent = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode == System.Net.HttpStatusCode.OK && responseContent != null)
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    return RedirectToAction("Homepage", "Student");
+                    return RedirectToAction("Homepage", "Mentor");
                 }
                 else
                 {
