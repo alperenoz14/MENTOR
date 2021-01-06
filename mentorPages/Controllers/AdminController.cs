@@ -44,6 +44,7 @@ namespace MENTOR.Controllers
             }
         }
 
+        Homepage data = new Homepage();
         [HttpGet]
         public async Task<IActionResult> Homepage()
         {
@@ -55,7 +56,30 @@ namespace MENTOR.Controllers
                 {
                     string responseBranch = await response.Content.ReadAsStringAsync();
                     var branches = JsonConvert.DeserializeObject<List<Branch>>(responseBranch);
-                    return View(branches);
+                    data.Branches = branches;
+                    return View(data);
+                }
+                else
+                {
+                    return StatusCode(404);
+                }
+            }
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> Homepage(Branch branch)
+        {
+            
+            using (var client = new HttpClient())
+            {
+                var data = JsonConvert.SerializeObject(branch);
+                HttpContent content = new StringContent(data, 
+                    System.Text.Encoding.UTF8, "application/json");
+                //APİ returns 404 ??
+                var response = await client.PostAsync("http://localhost:3000/addBranch", content);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return RedirectToAction("Homepage", "Admin");
                 }
                 else
                 {

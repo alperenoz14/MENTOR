@@ -12,5 +12,7 @@ namespace MENTOR.Models
         public Question Question { get; set; }
         public List<Student> Students { get; set; }
         public Answer Answer { get; set; }
+        public Branch Branch { get; set; }
+        public List<Branch> Branches { get; set; }
     }
 }

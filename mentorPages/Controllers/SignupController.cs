@@ -22,26 +22,9 @@ namespace MENTOR.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Signup(Mentor mentor)
-        {   //mentorbranchId'lerinin çekimi ve list olarak gönderiliyor ID'ler...
+        {   
             using (var client = new HttpClient())
             {
-                /*client.BaseAddress = new Uri("http://localhost:63744/api/MyApi");
-                var data = JsonConvert.SerializeObject(mentor);
-                HttpContent content = new StringContent(data,
-                System.Text.Encoding.UTF8, "application/json");
-                var result = await client.PostAsync("http://localhost:63744/api/MyApi/", content);
-                string resultContent = await result.Content.ReadAsStringAsync();
-                if (result.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    return StatusCode(200, data);
-                }
-                else if (result.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
-                    return StatusCode(404, result);
-                }*/
-
-
-                //client.BaseAddress = new Uri("http://localhost:3000/mentor/register");
                 var content = JsonConvert.SerializeObject(mentor);
                 HttpContent formContent = new StringContent(content,
                     System.Text.Encoding.UTF8, "application/json");
