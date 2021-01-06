@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http;
 using MENTOR.Models;
-using MENTOR.ApiModel;
 
 namespace MENTOR.Controllers
 {

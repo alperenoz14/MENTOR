@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="wwwroot\web3\css\style.css" />
+    <None Remove="wwwroot\web3\images\xx.jpg" />
+    <None Remove="wwwroot\web3\index.html" />
+    <None Remove="wwwroot\web3\js\index.js" />
+    <None Remove="wwwroot\web3\js\particles.min.js" />
+    <None Remove="wwwroot\web3\w3layouts-License.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\starter\beauty.html" />
     <None Include="wwwroot\starter\contact.html" />
     <None Include="wwwroot\starter\css\style-starter.css" />

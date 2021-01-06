@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using MENTOR.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+
+namespace MENTOR.Controllers
+{
+    public class AdminController : Controller
+    {
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(Admin admin)
+        {
+            using (var client = new HttpClient())
+            {
+                IList<KeyValuePair<string, string>> userCollection = new List<KeyValuePair<string, string>> {
+    { new KeyValuePair<string, string>("email",admin.email) },
+    { new KeyValuePair<string, string>("password", admin.password) }
+                };
+
+                var result = await client.PostAsync("http://localhost:3000/admin/login", new FormUrlEncodedContent(userCollection));
+                string resultContent = await result.Content.ReadAsStringAsync();
+                var adminData = JsonConvert.DeserializeObject<Admin>(resultContent);
+                if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    int adminId = adminData.adminId;
+                    HttpContext.Session.SetInt32("adminId", adminId);
+                    return RedirectToAction("Homepage", "Admin");
+                }
+                else
+                {
+                    return StatusCode(404);
+                }
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Homepage()
+        {
+            var id = HttpContext.Session.GetInt32("adminId");
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync("http://localhost:3000/getAllBranchs");
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    string responseBranch = await response.Content.ReadAsStringAsync();
+                    var branches = JsonConvert.DeserializeObject<List<Branch>>(responseBranch);
+                    return View(branches);
+                }
+                else
+                {
+                    return StatusCode(404);
+                }
+            }
+        }
+    }
+}
