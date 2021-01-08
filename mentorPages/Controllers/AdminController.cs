@@ -76,7 +76,7 @@ namespace MENTOR.Controllers
                 HttpContent content = new StringContent(data, 
                     System.Text.Encoding.UTF8, "application/json");
                 //APİ returns 404 ??
-                var response = await client.PostAsync("http://localhost:3000/addBranch", content);
+                var response = await client.PostAsync("http://localhost:3000/admin/addBranch", content);
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     return RedirectToAction("Homepage", "Admin");
