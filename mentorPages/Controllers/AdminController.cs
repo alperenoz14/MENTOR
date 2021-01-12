@@ -7,6 +7,10 @@ using MENTOR.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MENTOR.Controllers
 {
@@ -35,6 +39,13 @@ namespace MENTOR.Controllers
                 {
                     int adminId = adminData.adminId;
                     HttpContext.Session.SetInt32("adminId", adminId);
+                    ClaimsIdentity identity = null;
+                    identity = new ClaimsIdentity(new[]
+                    {
+                        new Claim(ClaimTypes.Role,"Admin")
+                    }, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+                    var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                     return RedirectToAction("Homepage", "Admin");
                 }
                 else
@@ -45,6 +56,7 @@ namespace MENTOR.Controllers
         }
 
         Homepage data = new Homepage();
+        [Authorize(Roles ="Admin")]
         [HttpGet]
         public async Task<IActionResult> Homepage()
         {

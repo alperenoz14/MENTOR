@@ -7,12 +7,19 @@ using MENTOR.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace MENTOR.Controllers
 {
+    [Authorize(Roles ="Student,Admin")]
     public class StudentController : Controller
     {
+        
         Homepage homepageDatas = new Homepage();
+
         [HttpGet]
         public async Task<IActionResult> Homepage()
         {
@@ -139,6 +146,14 @@ namespace MENTOR.Controllers
                     return StatusCode(404);
                 }
             }
+        }
+
+        [HttpPost]
+        [ActionName("Signout")]
+        public async Task<IActionResult> Signout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Login");
         }
     }
 }

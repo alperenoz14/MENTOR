@@ -8,9 +8,13 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http;
 using MENTOR.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace MENTOR.Controllers
 {
+    [Authorize(Roles ="Mentor,Admin")]
     public class MentorController : Controller
     {
         Homepage homepageDatas = new Homepage();
@@ -132,6 +136,14 @@ namespace MENTOR.Controllers
                     return StatusCode(Convert.ToInt16(response.StatusCode));
                 }
             }
+        }
+
+        [HttpPost]
+        [ActionName("Signout")]
+        public async Task<IActionResult> Signout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Login");
         }
     }
 }

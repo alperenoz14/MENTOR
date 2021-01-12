@@ -10,11 +10,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MENTOR.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
+        
         [HttpGet]
         public IActionResult Login()
         {
@@ -40,12 +47,26 @@ namespace MENTOR.Controllers
                     {
                         int mentorId = Convert.ToInt32(json.mentorId);
                         HttpContext.Session.SetInt32("mentorId", mentorId);
+                        ClaimsIdentity identity = null;
+                        identity = new ClaimsIdentity(new[]
+                        {
+                            new Claim(ClaimTypes.Role,"Mentor")
+                        },CookieAuthenticationDefaults.AuthenticationScheme);
+                        var principal = new ClaimsPrincipal(identity);
+                        var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                         return RedirectToAction("Profile", "Mentor");
                     }
                     else if (json.role == "student")
                     {
                         int studentId = Convert.ToInt32(json.studentId);
                         HttpContext.Session.SetInt32("studentId", studentId);
+                        ClaimsIdentity identity = null;
+                        identity = new ClaimsIdentity(new[]
+                        {
+                            new Claim(ClaimTypes.Role,"Student")
+                        }, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var principal = new ClaimsPrincipal(identity);
+                        var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                         return RedirectToAction("Profile", "Student");
                     }
                 }

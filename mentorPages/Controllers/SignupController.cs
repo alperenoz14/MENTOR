@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using MENTOR.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace MENTOR.Controllers
 {
+    [AllowAnonymous]
     public class SignupController : Controller
     {
         [HttpGet]
