@@ -28,92 +28,105 @@
                 <!-- /.card -->
 
                 <h1 class=" mb-3 text-dark text-center">Sorulan Sorular</h1>
-
-                <!-- /.card -->
-                @foreach (var item in Model.Questions)
+                @if (Model.Questions!=null)
                 {
-                    if (item.answer == null)
+                    <!-- /.card -->
+                    @foreach (var item in Model.Questions)
                     {
+                        if (item.answer == null)
+                        {
 
-                        <div class="card card-outline card-warning p-4">
-                            <form asp-controller="Mentor" asp-action="Homepage">
-                                <h4>SORU:</h4>
+                            <div class="card card-outline card-warning p-4">
+                                <form asp-controller="Mentor" asp-action="Homepage">
+                                    <h4>SORU:</h4>
+                                    <div class="card-header">
+                                        <h3 class="card-title">@item.question</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 style="margin-left: -20px">CEVAP:</h4>
+
+                                        <!--asp-for question id ile modele tutup sonra post edilecek...-->
+                                        <input asp-for="Answer.questionId" type="hidden" value="@item.questionId" />
+                                        <textarea asp-for="Answer.answer" class="form-control" rows="5"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="form-control btn btn-primary">Yanıtla</button>
+                                    </div>
+                                </form>
+                                <!-- /.card-body -->
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="card card-outline card-success p-4">
                                 <div class="card-header">
+                                    <h4>SORU:</h4>
                                     <h3 class="card-title">@item.question</h3>
                                 </div>
                                 <div class="card-body">
                                     <h4 style="margin-left: -20px">CEVAP:</h4>
-
-                                    <!--asp-for question id ile modele tutup sonra post edilecek...-->
-                                    <input asp-for="Answer.questionId" type="hidden" value="@item.questionId" />
-                                    <textarea asp-for="Answer.answer" class="form-control" rows="5"></textarea>
+                                    <p>
+                                        @item.answer
+                                    </p>
                                 </div>
+                                <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="form-control btn btn-primary">Yanıtla</button>
+                                    <!--<span>Soran Öğrenci: </span>@item.<br />-->
+                                    <span>Soru tarihi: </span>@item.date.ToString("dd MMM yyyy")
                                 </div>
-                            </form>
-                            <!-- /.card-body -->
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="card card-outline card-success p-4">
-                            <div class="card-header">
-                                <h4>SORU:</h4>
-                                <h3 class="card-title">@item.question</h3>
+                                <!-- /.card-footer-->
                             </div>
-                            <div class="card-body">
-                                <h4 style="margin-left: -20px">CEVAP:</h4>
-                                <p>
-                                    @item.answer
-                                </p>
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer">
-                                <!--<span>Soran Öğrenci: </span>@item.<br />-->
-                                <span>Soru tarihi: </span>@item.date.ToString("dd MMM yyyy")
-                            </div>
-                            <!-- /.card-footer-->
-                        </div>
 
+                        }
                     }
+                    <!-- /.card -->
                 }
-                <!-- /.card -->
-
+                else
+                {
+                    <h2>Şu anda hiç sorunuz yok.</h2>
+                }
             </div>
 
             <div class="col-lg-4">
                 <!-- Profile Image -->
                 <h1 style="text-align: center">ÖĞRENCİLERİM</h1>
-                @foreach (var student in Model.Students)
-                {
-                    <div class="mt-4 card card-primary card-outline">
-                        <div class="mt-1 card-body box-profile">
-                            <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle"
-                                     src="~/admin/dist/img/user4-128x128.jpg"
-                                     alt="User profile picture">
+                @if (Model.Students != null)
+                 {
+
+                    @foreach (var student in Model.Students)
+                    {
+                        <div class="mt-4 card card-primary card-outline">
+                            <div class="mt-1 card-body box-profile">
+                                <div class="text-center">
+                                    <img class="profile-user-img img-fluid img-circle"
+                                         src="~/admin/dist/img/user4-128x128.jpg"
+                                         alt="User profile picture">
+                                </div>
+
+                                <h3 class="profile-username text-center">@student.name @student.lastName</h3>
+
+                                <p class="text-muted text-center">Software Engineering Student</p>
+
+                                <hr>
+
+                                <strong><i class="fas fa-pencil-alt mr-1"></i> Alanı</strong>
+
+                                <p class="text-muted">
+                                    <span class="tag tag-danger">@student.branch</span>
+                                </p>
+
+                                <hr>
+
                             </div>
-
-                            <h3 class="profile-username text-center">@student.name @student.lastName</h3>
-
-                            <p class="text-muted text-center">Software Engineering Student</p>
-
-                            <hr>
-
-                            <strong><i class="fas fa-pencil-alt mr-1"></i> Alanı</strong>
-
-                            <p class="text-muted">
-                                <span class="tag tag-danger">@student.branch</span>
-                            </p>
-
-                            <hr>
-
+                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                }
+                        <!-- /.card -->
+                    }
+                 }
+                 else
+                 {
+                    <h2>Şu anda hiç öğrenciniz yok</h2>
+                 }
             </div>
 
         </div>

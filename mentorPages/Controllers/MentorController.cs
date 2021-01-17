@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace MENTOR.Controllers
 {
-    [Authorize(Roles ="Mentor,Admin")]
+    [Authorize(Roles = "Mentor,Admin")]
     public class MentorController : Controller
     {
         Homepage homepageDatas = new Homepage();
@@ -28,7 +28,7 @@ namespace MENTOR.Controllers
                 var responseQlist = await client.GetAsync("http://localhost:3000/mentor/getQuestions/" + id);
                 var responseStudent = await client.GetAsync("http://localhost:3000/mentor/getStudents/" + id);
 
-                if (responseQlist.StatusCode == System.Net.HttpStatusCode.OK && 
+                if (responseQlist.StatusCode == System.Net.HttpStatusCode.OK &&
                         responseStudent.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     string responseContent = await responseQlist.Content.ReadAsStringAsync();
@@ -50,6 +50,35 @@ namespace MENTOR.Controllers
                     homepageDatas.Students = resultStudent;
                     return View(homepageDatas);
                 }
+           else if (responseQlist.StatusCode == System.Net.HttpStatusCode.NoContent &&
+                             responseStudent.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    string responseStudents = await responseStudent.Content.ReadAsStringAsync();
+                    var resultStudent = JsonConvert.DeserializeObject<List<Student>>(responseStudents);
+                    foreach (var item in resultStudent)
+                    {
+                        if (item.branchId == 1) item.branch = "Web Programlama";
+                        else if (item.branchId == 2) item.branch = "Mobil Programlama";
+                        else if (item.branchId == 3) item.branch = "Veri Bilimi";
+                        else if (item.branchId == 4) item.branch = "Yapay Zeka/Makine Öğrenmesi";
+                        else if (item.branchId == 5) item.branch = "Genel Tavsiye";
+                    }
+                    homepageDatas.Students = resultStudent;
+                    return View(homepageDatas);
+                }
+           else if (responseQlist.StatusCode == System.Net.HttpStatusCode.OK &&
+                             responseStudent.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    string responseContent = await responseQlist.Content.ReadAsStringAsync();
+                    var resultQuestions = JsonConvert.DeserializeObject<List<Question>>(responseContent);
+                    homepageDatas.Questions = resultQuestions;
+                    return View(homepageDatas);
+                }
+           else if (responseQlist.StatusCode == System.Net.HttpStatusCode.NoContent &&
+                             responseStudent.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    return View(homepageDatas);
+                }
                 else
                 {
                     return StatusCode(404);
@@ -63,9 +92,9 @@ namespace MENTOR.Controllers
             using (var client = new HttpClient())
             {
                 var content = JsonConvert.SerializeObject(answer);
-                HttpContent dataContent = new StringContent(content, 
+                HttpContent dataContent = new StringContent(content,
                     System.Text.Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:3000/mentor/answerQuestion" ,dataContent);
+                var response = await client.PostAsync("http://localhost:3000/mentor/answerQuestion", dataContent);
                 string responseContent = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
