@@ -54,7 +54,7 @@ namespace MENTOR.Controllers
                         },CookieAuthenticationDefaults.AuthenticationScheme);
                         var principal = new ClaimsPrincipal(identity);
                         var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                        return RedirectToAction("Profile", "Mentor");
+                        return RedirectToAction("Homepage", "Mentor");
                     }
                     else if (json.role == "student")
                     {
@@ -67,7 +67,7 @@ namespace MENTOR.Controllers
                         }, CookieAuthenticationDefaults.AuthenticationScheme);
                         var principal = new ClaimsPrincipal(identity);
                         var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                        return RedirectToAction("Profile", "Student");
+                        return RedirectToAction("Homepage", "Student");
                     }
                 }
                 else if (result.StatusCode == System.Net.HttpStatusCode.NotFound)

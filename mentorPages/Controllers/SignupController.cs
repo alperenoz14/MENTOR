@@ -33,7 +33,7 @@ namespace MENTOR.Controllers
                 string resultContent = await result.Content.ReadAsStringAsync();
                 if (result.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    return StatusCode(200, resultContent);
+                    return RedirectToAction("Login","Login");
                 }
                 else if (result.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
@@ -63,7 +63,7 @@ namespace MENTOR.Controllers
                 string resultContent = await result.Content.ReadAsStringAsync();
                 if (result.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    return StatusCode(200, resultContent);
+                    return RedirectToAction("Login", "Login");
                 }
                 else if (result.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {

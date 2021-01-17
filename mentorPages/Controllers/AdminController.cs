@@ -99,5 +99,13 @@ namespace MENTOR.Controllers
                 }
             }
         }
+
+        [HttpPost]
+        [ActionName("Signout")]
+        public async Task<IActionResult> Signout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login","Admin");
+        }
     }
 }

@@ -61,12 +61,12 @@
                             </a>
                         </li>
                         <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-times-circle"></i>
-                                <p>
-                                    Çıkış
-                                </p>
-                            </a>
+                            <form asp-controller="Admin" asp-action="Signout">
+                                <a href="~/Admin/Login" class="nav-link active">
+                                    <i class="nav-icon fas fa-times-circle"></i>
+                                    <button class="btn btn-danger" type="submit">Çıkış</button>
+                                </a>
+                            </form>
                         </li>
                     </ul>
                 </nav>

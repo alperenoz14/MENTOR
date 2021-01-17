@@ -44,6 +44,9 @@ Author URL: http://w3layouts.com
                     </nav>
                     <ul class="navbar-nav">
                         <li class="nav-item active">
+                            <a class="nav-link" href="~/Admin/login">Admin</a>
+                        </li>
+                        <li class="nav-item active">
                             <a class="nav-link" href="~/Login/login">Giriş Yap</a>
                         </li>
                         <li class="nav-item @@contact__active">
@@ -208,105 +211,21 @@ Author URL: http://w3layouts.com
                                     </a>
                                 </div>
                                 <div class="card-body blog-details">
-                                    <span class="label-blue">Web Programlama</span>
+                                    <span class="label-blue">Mobil Programlama</span>
                                     <a href="#blog-single.html" class="blog-desc">
-                                        Soru baslıgı Soru baslıgı
+                                        Mobil Programlama Hakkında
                                     </a>
                                     <p>
-                                        Soru içerigi (devamını oku/detaya git olacak...)
+                                        Mobil programlamaya hangi dille başlamamı önerir siniz ?
                                     </p>
                                     <div class="author align-items-center mt-3 mb-1">
                                         <img src="~/starter/images/a1.jpg" alt="" class="img-fluid rounded-circle" />
                                         <ul class="blog-meta">
                                             <li>
-                                                <a href="author.html">Soru soran isim(href ogr-profil)</a>
+                                                <a href="~/Login/Login">Alperen Öz</a>
                                             </li>
                                             <li class="meta-item blog-lesson">
-                                                <span class="meta-value">@DateTime.Now</span>. <span class="meta-value ml-2"><span class="fa fa-clock-o"></span>1 min</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 mt-md-0 mt-sm-5 mt-4">
-                            <div class="card">
-                                <div class="card-header p-0 position-relative">
-                                    <a href="#blog-single.html">
-                                    </a>
-                                </div>
-                                <div class="card-body blog-details">
-                                    <span class="label-blue">Mobil Programlama</span>
-                                    <a href="#blog-single.html" class="blog-desc">
-                                        Soru baslıgı Soru baslıgı
-                                    </a>
-                                    <p>
-                                        Soru içeriği(devamını oku/detaya git olacak...)
-                                    </p>
-                                    <div class="author align-items-center mt-3 mb-1">
-                                        <img src="~/starter/images/a2.jpg" alt="" class="img-fluid rounded-circle" />
-                                        <ul class="blog-meta">
-                                            <li>
-                                                <a href="author.html">Soru soran isim(href ogr-profil)</a>
-                                            </li>
-                                            <li class="meta-item blog-lesson">
-                                                <span class="meta-value"> July 13, 2020 </span>. <span class="meta-value ml-2"><span class="fa fa-clock-o"></span>1 min</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 mt-md-0 mt-sm-5 mt-4">
-                            <div class="card">
-                                <div class="card-header p-0 position-relative">
-                                    <a href="#blog-single.html">
-                                    </a>
-                                </div>
-                                <div class="card-body blog-details">
-                                    <span class="label-blue">Mobil Programlama</span>
-                                    <a href="#blog-single.html" class="blog-desc">
-                                        Soru baslıgı Soru baslıgı
-                                    </a>
-                                    <p>
-                                        Soru içeriği(devamını oku/detaya git olacak...)
-                                    </p>
-                                    <div class="author align-items-center mt-3 mb-1">
-                                        <img src="~/starter/images/a2.jpg" alt="" class="img-fluid rounded-circle" />
-                                        <ul class="blog-meta">
-                                            <li>
-                                                <a href="author.html">Soru soran isim(href ogr-profil)</a>
-                                            </li>
-                                            <li class="meta-item blog-lesson">
-                                                <span class="meta-value"> July 13, 2020 </span>. <span class="meta-value ml-2"><span class="fa fa-clock-o"></span>1 min</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 mt-md-0 mt-sm-5 mt-4">
-                            <div class="card">
-                                <div class="card-header p-0 position-relative">
-                                    <a href="#blog-single.html">
-                                    </a>
-                                </div>
-                                <div class="card-body blog-details">
-                                    <span class="label-blue">Mobil Programlama</span>
-                                    <a href="#blog-single.html" class="blog-desc">
-                                        Soru baslıgı Soru baslıgı
-                                    </a>
-                                    <p>
-                                        Soru içeriği(devamını oku/detaya git olacak...)
-                                    </p>
-                                    <div class="author align-items-center mt-3 mb-1">
-                                        <img src="~/starter/images/a2.jpg" alt="" class="img-fluid rounded-circle" />
-                                        <ul class="blog-meta">
-                                            <li>
-                                                <a href="author.html">Soru soran isim(href ogr-profil)</a>
-                                            </li>
-                                            <li class="meta-item blog-lesson">
-                                                <span class="meta-value"> July 13, 2020 </span>. <span class="meta-value ml-2"><span class="fa fa-clock-o"></span>1 min</span>
+                                                <span class="meta-value">@DateTime.Now.ToString("dd MMM yyyy")</span>. <span class="meta-value ml-2"></span>
                                             </li>
                                         </ul>
                                     </div>
@@ -318,103 +237,36 @@ Author URL: http://w3layouts.com
                 <div class="col-lg-4 trending mt-lg-0 mt-5">
                     <div class="topics">
                         <h2 class="section-title-left mb-4"> Konu Başlıkları</h2>
-                        <a href="#" class="topics-list">
+                        <a href="~/Login/Login" class="topics-list">
                             <div class="list1">
                                 <span class="fa fa-desktop"></span>
                                 <h4>Web Programlama</h4>
                             </div>
                         </a>
-                        <a href="#" class="topics-list mt-3">
+                        <a href="~/Login/Login" class="topics-list mt-3">
                             <div class="list1">
                                 <span class="fa fa-mobile-phone"></span>
                                 <h4>Mobil Programlama</h4>
                             </div>
                         </a>
-                        <a href="#" class="topics-list mt-3">
+                        <a href="~/Login/Login" class="topics-list mt-3">
                             <div class="list1">
                                 <span class="fa fa-bar-chart"></span>
                                 <h4>Veri Bilimi</h4>
                             </div>
                         </a>
-                        <a href="#" class="topics-list mt-3">
+                        <a href="~/Login/Login" class="topics-list mt-3">
                             <div class="list1">
                                 <span class="fa fa-cogs"></span>
                                 <h4>Yapay Zeka/Makine Öğrenmesi</h4>
                             </div>
                         </a>
-                        <a href="#" class="topics-list mt-3">
+                        <a href="~/Login/Login" class="topics-list mt-3">
                             <div class="list1">
                                 <span class="fa fa-pie-chart"></span>
                                 <h4>Genel Tavsiye</h4>
                             </div>
                         </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="mentorler" class="w3l-homeblock3 py-5">
-        <div class="container py-lg-5 py-md-4">
-            <h3 class="section-title-left mb-4"> MENTORLER </h3>
-            <div class="row top-pics">
-                <div class="col-lg-4 col-md-6">
-                    <div class="top-pic1">
-                        <div class="card-body blog-details">
-                            <a href="#blog-single.html" class="blog-desc">
-                                mentor isim+foto?
-                            </a>
-                            <div class="author align-items-center">
-                                <img src="~/starter/images/a1.jpg" alt="" class="img-fluid rounded-circle" />
-                                <ul class="blog-meta">
-                                    <li>
-                                        <a href="author.html">mentor ad soyad(href mentorDetay sayfa)</a>
-                                    </li>
-                                    <li class="meta-item blog-lesson">
-                                        <span class="meta-value"> July 13, 2020 </span>. <span class="meta-value ml-2"><span class="fa fa-clock-o"></span>1 min</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mt-md-0 mt-4">
-                    <div class="top-pic2">
-                        <div class="card-body blog-details">
-                            <a href="#blog-single.html" class="blog-desc">
-                                mentor isim+foto?
-                            </a>
-                            <div class="author align-items-center">
-                                <img src="~/starter/images/a2.jpg" alt="" class="img-fluid rounded-circle" />
-                                <ul class="blog-meta">
-                                    <li>
-                                        <a href="author.html">mentor ad soyad(href mentorDetay sayfa)</a>
-                                    </li>
-                                    <li class="meta-item blog-lesson">
-                                        <span class="meta-value"> July 13, 2020 </span>. <span class="meta-value ml-2"><span class="fa fa-clock-o"></span>1 min</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mt-lg-0 mt-4">
-                    <div class="top-pic3">
-                        <div class="card-body blog-details">
-                            <a href="#blog-single.html" class="blog-desc">
-                                mentor isim+foto?
-                            </a>
-                            <div class="author align-items-center">
-                                <img src="~/starter/images/a3.jpg" alt="" class="img-fluid rounded-circle" />
-                                <ul class="blog-meta">
-                                    <li>
-                                        <a href="author.html">mentor ad soyad(href mentorDetay sayfa)</a>
-                                    </li>
-                                    <li class="meta-item blog-lesson">
-                                        <span class="meta-value"> July 13, 2020 </span>. <span class="meta-value ml-2"><span class="fa fa-clock-o"></span>1 min</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -430,7 +282,7 @@ Author URL: http://w3layouts.com
                             <a class="navbar-brand mb-3" href="~/Guest/Homepage">
                                 MENTORUM
                             </a>
-                            <p class="copy-footer-28"> © 2020.Tüm Hakları Saklıdır. </p>
+                            <p class="copy-footer-28"> © 2021.Tüm Hakları Saklıdır. </p>
                             <h5 class="mt-2">Design by <a href="https://w3layouts.com/">W3Layouts</a></h5>
                         </div>
                         <div class="col-lg-8 row">
@@ -442,10 +294,9 @@ Author URL: http://w3layouts.com
                                 </ul>
                             </div>
                             <div class="col-sm-4 col-6 footer-list-28">
-                                <h6 class="footer-title-28">Bize Ulaş</h6>
+                                <h6 class="footer-title-28">Bana Ulaş</h6>
                                 <ul>
-                                    <li><a href="beauty.html">Test</a></li>
-                                    <li><a href="fashion.html">Test</a></li>
+                                    <li><a href="#">alperenoz1464@gmail.com</a></li>
                                 </ul>
                             </div>
                             <div class="col-sm-4 col-6 footer-list-28 mt-sm-0 mt-4">

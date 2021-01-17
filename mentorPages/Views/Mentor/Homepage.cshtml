@@ -37,7 +37,6 @@
 
                         <div class="card card-outline card-warning p-4">
                             <form asp-controller="Mentor" asp-action="Homepage">
-                                <span><label class="border rounded" style="background-color: mediumpurple">web programlama</label></span>
                                 <h4>SORU:</h4>
                                 <div class="card-header">
                                     <h3 class="card-title">@item.question</h3>
@@ -60,7 +59,6 @@
                     {
                         <div class="card card-outline card-success p-4">
                             <div class="card-header">
-                                <span><label style="background-color: mediumpurple" class="border rounded back">mobil programlama</label></span>
                                 <h4>SORU:</h4>
                                 <h3 class="card-title">@item.question</h3>
                             </div>
@@ -73,7 +71,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 <!--<span>Soran Öğrenci: </span>@item.<br />-->
-                                <span>Soru tarihi:</span>@item.date
+                                <span>Soru tarihi: </span>@item.date.ToString("dd MMM yyyy")
                             </div>
                             <!-- /.card-footer-->
                         </div>
